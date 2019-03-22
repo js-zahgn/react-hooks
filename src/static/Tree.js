@@ -1,8 +1,7 @@
 //定义节点
 class Node {
-  constructor(data) {
-    this.root = this;
-    this.data = data;
+  constructor(key) {
+    this.key = key;
     this.left = null;
     this.right = null
   }
@@ -13,10 +12,10 @@ class BinarySearchTree {
     this.root = null
   }
   //插入节点
-  insert(data) {
-    const newNode = new Node(data);
+  insert(key) {
+    const newNode = new Node(key);
     const insertNode = (node, newNode) => {
-      if (newNode.data < node.data) {
+      if (newNode.key < node.key) {
         if (node.left === null) {
           node.left = newNode
         } else {
@@ -28,14 +27,12 @@ class BinarySearchTree {
         } else {
           insertNode(node.right, newNode)
         }
-
       }
     };
     if (!this.root) {
       this.root = newNode
     } else {
       insertNode(this.root, newNode)
-
     }
   }
   //中序遍历
@@ -44,7 +41,7 @@ class BinarySearchTree {
     const inOrderNode = (node, callback) => {
       if (node !== null) {
         inOrderNode(node.left, callback);
-        backs.push(callback(node.data));
+        backs.push(callback(node.key));
         inOrderNode(node.right, callback)
       }
     };
@@ -60,7 +57,7 @@ class BinarySearchTree {
     let backs = [];
     const preOrderNode = (node, callback) => {
       if (node !== null) {
-        backs.push(callback(node.data));
+        backs.push(callback(node.key));
         preOrderNode(node.left, callback);
         preOrderNode(node.right, callback)
       }
@@ -79,7 +76,7 @@ class BinarySearchTree {
       if (node !== null) {
         postOrderNode(node.left, callback);
         postOrderNode(node.right, callback);
-        backs.push(callback(node.data))
+        backs.push(callback(node.key))
       }
     };
     postOrderNode(this.root, callback);
@@ -104,38 +101,38 @@ class BinarySearchTree {
     return minNode(node || this.root)
   }
   //查找特定值
-  find(data) {
-    const findNode = (node, data) => {
+  find(key) {
+    const findNode = (node, key) => {
       if (node === null) return false;
-      if (node.data === data) return node;
-      return findNode((data < node.data) ? node.left : node.right, data)
+      if (node.key === key) return node;
+      return findNode((key < node.key) ? node.left : node.right, key)
     };
-    return findNode(this.root, data)
+    return findNode(this.root, key)
 
   }
   //删除节点
-  remove(data) {
-    const removeNode = (node, data) => {
+  remove(key) {
+    const removeNode = (node, key) => {
       if (node === null) return null;
-      if (node.data === data) {
+      if (node.key === key) {
         if (node.left === null && node.right === null) return null;
         if (node.left === null) return node.right;
         if (node.right === null) return node.left;
         if (node.left !== null && node.right !== null) {
           let _node = this.getMin(node.right);
-          node.data = _node.data;
-          node.right = removeNode(node.right, data);
+          node.key = _node.key;
+          node.right = removeNode(node.right, key);
           return node
         }
-      } else if (data < node.data) {
-        node.left = removeNode(node.left, data);
+      } else if (key < node.key) {
+        node.left = removeNode(node.left, key);
         return node
       } else {
-        node.right = removeNode(node.right, data);
+        node.right = removeNode(node.right, key);
         return node
       }
     };
-    return removeNode(this.root, data)
+    return removeNode(this.root, key)
   }
 }
 //创建BST
