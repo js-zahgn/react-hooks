@@ -43,7 +43,7 @@ const Test = () => {
       <h2>计数结果{count}</h2>
       <button onClick={counter}>click me</button>
       <h2>{state.num}</h2>
-      <Btn state={state} dispatch={dispatch}/>
+      <Btn state={state} dispatch={dispatch} />
     </div>
   )
 }

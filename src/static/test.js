@@ -1,7 +1,9 @@
 import LinkList from './LinkList';
 
 import DbLinkList from './DbLinkList';
+import './Tree'
 
+console.log('after tree~~~~~~~~~~~~~~~~~~~')
 const list = new LinkList();
 const arr = new Array(10).fill().map((_, index) => ({
   name: 'item->' + index
