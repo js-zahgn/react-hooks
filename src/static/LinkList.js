@@ -6,7 +6,7 @@ class Node {
 }
 let length = new WeakMap();
 const head = new WeakMap();
-class LinkList {
+export default class LinkList {
   constructor() {
     length.set(this, 0);
     head.set(this, null);
@@ -129,5 +129,3 @@ class LinkList {
     return head.get(this);
   }
 }
-
-export default LinkList

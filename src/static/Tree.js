@@ -11,6 +11,32 @@ class BinarySearchTree {
   constructor() {
     this.root = null
   }
+
+  getTreeHeight(node) {
+    if (node === null) return 0;
+    else {
+      const leftHeight = this.getTreeHeight(node.left);
+      const rightHeight = this.getTreeHeight(node.right);
+      // 返回左子树、右子树中最大高度
+      return (leftHeight > rightHeight ? leftHeight : rightHeight) + 1
+    }
+  }
+
+  //自动平衡
+  balance(node) {
+    if (node === null) {
+      return node;
+    }
+    // 左单旋
+    const _rotateLeft = (avlNode) => {
+      const node = avlNode.right; // 保存右子节点
+      avlNode.right = node.left; // node的左子节点链接到avlNode成为其右子节点
+      node.left = avlNode; // avlNode链接到node成为其左子节点
+      return node;
+    }
+    // const _rotateLeftRight = (node)=>  
+  }
+
   //插入节点
   insert(key) {
     const newNode = new Node(key);
@@ -152,6 +178,8 @@ tree.insert(18);
 tree.insert(25);
 console.log(tree);
 console.log(tree.root);
+//获取高度
+console.log('树的高度->' + tree.getTreeHeight(tree.root));
 //中序遍历BST
 console.log(tree.inOrder());
 //前序遍历BST
