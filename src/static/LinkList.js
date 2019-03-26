@@ -6,7 +6,7 @@ class Node {
 }
 let length = new WeakMap();
 const head = new WeakMap();
-export default class LinkList {
+class LinkList {
   constructor() {
     length.set(this, 0);
     head.set(this, null);
@@ -129,3 +129,16 @@ export default class LinkList {
     return head.get(this);
   }
 }
+
+const list = new LinkList();
+const arr = new Array(10).fill().map((_, index) => ({
+  name: 'item->' + index
+}));
+arr.forEach(e => list.append(e));
+list.insert(7, {
+  name: 'item->N'
+});
+console.group('*******LinkList*******');
+console.log(list);
+list.print();
+console.groupEnd('*******LinkList*******');

@@ -154,4 +154,15 @@ class DbLinkList {
 
 }
 
-export default DbLinkList
+const arr = new Array(10).fill().map((_, index) => ({
+  name: 'item->' + index
+}));
+const dbList = new DbLinkList();
+arr.forEach(e => dbList.append(e));
+dbList.insert(8, {
+  name: 'item->N888'
+});
+console.group('**********DBLinkList***********')
+console.log(dbList)
+dbList.print()
+console.groupEnd('**********DBLinkList***********')

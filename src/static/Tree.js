@@ -7,7 +7,7 @@ class Node {
   }
 }
 //创建二叉搜索树(BST)）
-class BinarySearchTree {
+class AVLTree {
   constructor() {
     this.root = null
   }
@@ -217,7 +217,7 @@ class BinarySearchTree {
   }
 }
 //创建BST
-const tree = new BinarySearchTree();
+const tree = new AVLTree();
 tree.insert(11);
 tree.insert(7);
 tree.insert(9);
@@ -229,6 +229,7 @@ tree.insert(15);
 tree.insert(17);
 tree.insert(6);
 tree.insert(14);
+console.group('*******************tree*****************')
 console.log(tree);
 console.log(tree.getNodeHeight(tree.root))
 console.log('root->' + tree.root.key);
@@ -250,3 +251,4 @@ console.log(tree.remove(11));
 const a = tree.remove(11);
 console.log(a.root);
 console.log(tree);
+console.groupEnd('*******************tree*****************')
