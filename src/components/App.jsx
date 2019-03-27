@@ -1,9 +1,4 @@
-import React, {
-  Fragment,
-  useState,
-  useEffect,
-  useRef,
-} from 'react'
+import React, { Fragment, useState, useEffect, useRef } from 'react'
 import IO from 'socket.io-client'
 
 import Test from './Test'
@@ -111,7 +106,7 @@ const App = () => {
         }
       }}
     >
-      <Test/>
+      <Test />
       <Fragment>
         <Consumer>{param => <User {...param} name='B' user='A' />}</Consumer>
         <Consumer>{param => <User {...param} name='A' user='B' />}</Consumer>

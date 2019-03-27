@@ -25,13 +25,6 @@ class RedBlackTree {
     this.root = null;
   }
 
-  isRed(node) {
-    if (!node) {
-      return false;
-    }
-    return node.color === Colors.RED;
-  }
-
   rotateLeft(node) {
     let temp = node.right;
     if (temp !== null) {
@@ -70,14 +63,16 @@ class RedBlackTree {
       node.key = element;
     }
 
-    if (this.isRed(node.right) && !this.isRed(node.left)) {
+    const _isRed = (node) => node ? (node.color === Colors.RED) : false;
+
+    if (_isRed(node.right) && !_isRed(node.left)) {
       newRoot = this.rotateLeft(node);
     }
 
-    if (this.isRed(node.left) && this.isRed(node.left.left)) {
+    if (_isRed(node.left) && _isRed(node.left.left)) {
       newRoot = this.rotateRight(node);
     }
-    if (this.isRed(node.left) && this.isRed(node.right)) {
+    if (_isRed(node.left) && _isRed(node.right)) {
       node.left.flipColor();
       node.right.flipColor();
     }

@@ -7,6 +7,7 @@ function HashTable() {
   //   }, 0);
   //   return hash % 37;
   // }
+  // 常用的解决散列表冲突方法
   var djb2HashCode = function (key) {
     var hash = 5381;
     for (var i = 0; i < key.length; i++) {
@@ -16,7 +17,6 @@ function HashTable() {
   }
   this.put = function (key, value) {
     var position = djb2HashCode(key)
-    console.log(position + '->' + key);
     table[position] = value;
   }
   // function ValuePair(key, value) {
