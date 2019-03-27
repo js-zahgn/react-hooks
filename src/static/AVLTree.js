@@ -28,24 +28,14 @@ class AVLTree {
       return node;
     }
 
-    const _getNodeHeight = (node) => {
-      if (node === null) return 0;
-      else {
-        const leftHeight = _getNodeHeight(node.left);
-        const rightHeight = _getNodeHeight(node.right);
-        // 返回左子树、右子树中最大高度
-        return (leftHeight > rightHeight ? leftHeight : rightHeight) + 1
-      }
-    };
-
-    // 左单旋
+    // 左单旋 -----------图示例 ./images/rotateLeft.png
     const _rotateLeft = (avlNode) => {
       let node = avlNode.right; // 保存右子节点  D节点
       avlNode.right = node.left; // node的左子节点链接到avlNode成为其右子节点
       node.left = avlNode; // avlNode链接到node成为其左子节点
       return node;
     }
-    // 右单旋
+    // 右单旋 -----------图示例 ./images/rotateRight.png
     const _rotateRight = (avlNode) => {
       let node = avlNode.left;
       avlNode.left = node.right;
@@ -63,17 +53,16 @@ class AVLTree {
       return _rotateLeft(avlNode);
     }
     // 左子树高度比右子树高度大1以上
-    if (_getNodeHeight(node.left) - _getNodeHeight(node.right) > 1) {
-      if (_getNodeHeight(node.left.left) >= _getNodeHeight(node.left.right)) {
+    if (this.getNodeHeight(node.left) - this.getNodeHeight(node.right) > 1) {
+      if (this.getNodeHeight(node.left.left) >= this.getNodeHeight(node.left.right)) {
         // 左子树的左子树高度大于等于左子树的右子树高度
         // 直接进行右旋转
         node = _rotateRight(node);
       } else {
         node = _rotateLeftRight(node);
       }
-    } else if (_getNodeHeight(node.right) - _getNodeHeight(node.left) > 1) {
-
-      if (_getNodeHeight(node.right.right) >= _getNodeHeight(node.right.left)) {
+    } else if (this.getNodeHeight(node.right) - this.getNodeHeight(node.left) > 1) {
+      if (this.getNodeHeight(node.right.right) >= this.getNodeHeight(node.right.left)) {
         node = _rotateLeft(node);
       } else {
         node = _rotateRightLeft(node);
@@ -190,14 +179,14 @@ class AVLTree {
   }
   //删除节点
   remove(key) {
-    const removeNode = (node, key) => {
+    const _removeNode = (node, key) => {
       if (node === null) return null;
       if (key < node.key) {
-        node.left = removeNode(node.left, key);
+        node.left = _removeNode(node.left, key);
         node = this.balance(node);
         return node;
       } else if (key > node.key) {
-        node.right = removeNode(node.right, key);
+        node.right = _removeNode(node.right, key);
         node = this.balance(node);
         return node;
       } else {
@@ -207,13 +196,13 @@ class AVLTree {
         if (node.left !== null && node.right !== null) {
           let _node = this.getMin(node.right);
           node.key = _node.key;
-          node.right = removeNode(node.right, key);
+          node.right = _removeNode(node.right, key);
           node = this.balance(node);
           return node;
         }
       }
     };
-    return removeNode(this.root, key)
+    return _removeNode(this.root, key)
   }
 }
 //创建BST
