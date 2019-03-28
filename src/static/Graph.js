@@ -1,3 +1,27 @@
+class Queue {
+  constructor() {
+    this.items = [];
+  }
+  enqueue(ele) {
+    this.items.push(ele);
+  }
+  dequeue() {
+    return this.items.shift();
+  }
+  front() {
+    return this.items[0];
+  }
+  isEmpty() {
+    return this.items.length < 1;
+  }
+  clear() {
+    this.items = [];
+  }
+  size() {
+    return this.items.length;
+  }
+}
+
 class Graph {
   constructor() {
     this.vertices = [];
@@ -11,6 +35,20 @@ class Graph {
     this.adjList[v].push(w);
     this.adjList[w].push(v);
   }
+
+  // 初始化途中各顶点的颜色
+  _initColor() {
+    const color = [];
+    this.vertices.map(e => color[e] = 'white');
+    return color;
+  }
+
+  // 广度优先搜索，入参v为顶点，从此顶点开始搜索整图
+  bfs(v, cb) {
+    const color = this._initColor(),
+      queue = new Queue();
+  }
+
   print() {
     return this.vertices.reduce((res, cur) => res += `${cur} -> ${this.adjList[cur].join(' ')} \n`, '');
   }

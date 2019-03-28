@@ -26,7 +26,7 @@ function HashTable() {
   //     console.log(`[${key}->${value}]`);
   //   }
   // }
-  // 线性探查
+  // 线性探查 解决散列表冲突
   // this.put = function (key, value) {
   //   var pos = loseloseHashCode(key);
   //   if (table[pos] === undefined) {
