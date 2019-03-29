@@ -47,6 +47,23 @@ class Graph {
   bfs(v, cb) {
     const color = this._initColor(),
       queue = new Queue();
+    // 将顶点放入队列
+    queue.enqueue(v);
+    // 如果队列非空，就证明还有顶点未被探索
+    while (!queue.isEmpty()) {
+      // 提取队列中第一个元素
+      const u = queue.dequeue();
+      // adjList为邻接表，从邻接表中拿到u所有的邻接顶点
+      const neighbors = this.adjList[u];
+      neighbors.forEach(neighbor => {
+        if (color[neighbor] === 'white') {
+          color[neighbor] = 'grey';
+          // 入队每一个相邻节点
+          queue.enqueue(neighbor); 
+        }
+      });
+
+    }
   }
 
   print() {
