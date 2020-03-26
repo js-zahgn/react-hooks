@@ -4,9 +4,10 @@ import './static/styles/reset.css';
 import './static/styles/index.scss';
 import './static/fonts/iconfont.css';
 import App from './components/App';
+
 import * as serviceWorker from './serviceWorker';
 
-import './static/test'
+import './dataMatch/test'
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
