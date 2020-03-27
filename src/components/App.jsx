@@ -5,7 +5,7 @@ import Test from "./Test";
 import User from "./User";
 
 // Create Store
-const HistoryContext = React.createContext({
+export const HistoryContext = React.createContext({
   history: [],
   addNewMsg: () => {},
   domScroll: () => {},
@@ -47,9 +47,10 @@ const App = () => {
         }
       }}
     >
-      <Consumer>
+      <Test />
+      {/* <Consumer>
         {param => <Test width={param._width} height={param._height} />}
-      </Consumer>
+      </Consumer> */}
       <Fragment>
         <Consumer>{param => <User {...param} name="B" user="A" />}</Consumer>
         <Consumer>{param => <User {...param} name="A" user="B" />}</Consumer>

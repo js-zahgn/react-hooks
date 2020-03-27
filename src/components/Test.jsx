@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 // useEffect Test
-
+import { HistoryContext } from "./App";
 const reducer = (state, action) => {
   switch (action.type) {
     case "increment":
@@ -19,10 +19,11 @@ const Btn = props => {
     </>
   );
 };
-const Test = (props) => {
+const Test = props => {
   const [count, setCount] = useState(0);
   const [state, dispatch] = useReducer(reducer, { num: 0 });
-
+  const context = useContext(HistoryContext);
+  console.log("connnnnnnn--->", context);
   // useEffect(() => counter(), []);
   // 组件挂载、更新、卸载时都会执行,可以多次使用,after render.
   // 第二个参数是数组, 组件rerender后数组中的值发生变化是才会执行该effectHook,
