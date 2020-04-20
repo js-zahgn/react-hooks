@@ -1,4 +1,5 @@
 import React from "react";
+import EventBus from "../eventBus";
 
 const timeFormat = time => {
   const date = new Date(time);
@@ -34,13 +35,21 @@ class User extends React.Component {
       }
     );
   }
+  componentDidMount() {
+    EventBus.$on("ccc", (param) => {
+      console.log(param)
+    })
+  }
+  eventTest() {
+    EventBus.$emit("ccc", {bbb: 132})
+  }
   render() {
     const { user, name, history } = this.props;
     return (
       <div className="container">
         <div className="title">
           <div>
-            <i className="icon icon-avatar" />
+            <i className="icon icon-avatar" onClick={this.eventTest.bind(this)}/>
             <b style={{ marginLeft: "10px" }}>{user}</b>
           </div>
           <div className="right">

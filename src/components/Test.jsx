@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
 // useEffect Test
 import { HistoryContext } from "./App";
+import EventBus from "../eventBus";
 const reducer = (state, action) => {
   switch (action.type) {
     case "increment":
@@ -16,6 +17,7 @@ const Btn = props => {
     <>
       <button onClick={() => props.dispatch({ type: "increment" })}>+</button>
       <button onClick={() => props.dispatch({ type: "decrement" })}>-</button>
+      <button onClick={() => EventBus.$emit("ccc", {ppp: "123"})}>click EventBus</button>
     </>
   );
 };
