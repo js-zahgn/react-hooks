@@ -14,20 +14,23 @@ class User extends React.Component {
     super(props);
     this.state = {
       ref: `chatBox${props.name}`,
-      msg: ""
+      msg: "",
+      typing: false
     };
     this._changeMsg = this._changeMsg.bind(this);
-    this._updataMsg = this._updataMsg.bind(this);
+    this._updateMsg = this._updateMsg.bind(this);
   }
 
   componentDidUpdate(prevProps) {
-    const current = this.refs[this.state.ref];
-    current.scrollTo(0, current.scrollHeight);
+    if(!this.state.typing){
+      const current = this.refs[this.state.ref];
+      current.scrollTop = current.scrollHeight;
+    }
   }
   _changeMsg(msg) {
-    this.setState({ msg });
+    this.setState({ msg, typing: !!msg });
   }
-  _updataMsg() {
+  _updateMsg() {
     this.props.addNewMsg(
       { sender: this.props.name, msg: this.state.msg },
       () => {
@@ -94,7 +97,7 @@ class User extends React.Component {
               }}
             />
           </p>
-          <button onClick={() => this._updataMsg()}>
+          <button onClick={() => this._updateMsg()}>
             <i className="icon icon-paper" />
           </button>
         </div>
